@@ -24,10 +24,12 @@ const PlayerController = {
 
     createPlayer(req, res) {
         models.Player.create({
-            name: req.body.name,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             jerseyNumber: req.body.jerseyNumber,
             position: req.body.position,
             year: req.body.year,
+            teamId: 'ccny',
             hardHitBalls: 0,
             ballsInPlay: 0,
             hhbPercentage: 0,
