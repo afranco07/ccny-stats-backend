@@ -15,7 +15,7 @@ const PlayerController = {
         models.Player.findAll()
             .then(allPlayers => {
                 if(!allPlayers) {
-                    res.status(404).json({ msg: 'No players foud' });
+                    res.status(404).json({ msg: 'No players found' });
                 }
                 res.json(allPlayers);
             })
