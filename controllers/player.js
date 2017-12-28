@@ -15,7 +15,7 @@ const PlayerController = {
         models.Player.findAll()
             .then(allPlayers => {
                 if(!allPlayers) {
-                    res.status(404).json({ msg: 'No players foud' });
+                    res.status(404).json({ msg: 'No players found' });
                 }
                 res.json(allPlayers);
             })
@@ -24,7 +24,8 @@ const PlayerController = {
 
     createPlayer(req, res) {
         models.Player.create({
-            name: req.body.name,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             jerseyNumber: req.body.jerseyNumber,
             position: req.body.position,
             year: req.body.year,
@@ -47,6 +48,7 @@ const PlayerController = {
             BIPoutsideTheZoneTotal: 0,
             swingPercentage: 0,
             contactPercentage: 0,
+            TeamId: req.body.teamid,
         })
         .then(player => {
             res.send('Player added successfully');

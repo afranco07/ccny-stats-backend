@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Player = sequelize.define('Player', {
-        name: DataTypes.STRING,
+        firstName: DataTypes.STRING,
+        lastName: DataTypes.STRING,
         jerseyNumber: DataTypes.INTEGER,
         position: DataTypes.INTEGER,
         year: DataTypes.INTEGER,
@@ -24,10 +25,9 @@ module.exports = (sequelize, DataTypes) => {
         swingPercentage: DataTypes.DOUBLE,
         contactPercentage: DataTypes.DOUBLE,
     });
-    /*
+
     Player.associate = (models) => {
-        models.Player.hasOne(models.Team);
+        models.Player.belongsTo(models.Team);
     }
-    */
     return Player;
 }
