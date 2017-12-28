@@ -29,7 +29,6 @@ const PlayerController = {
             jerseyNumber: req.body.jerseyNumber,
             position: req.body.position,
             year: req.body.year,
-            teamId: 'ccny',
             hardHitBalls: 0,
             ballsInPlay: 0,
             hhbPercentage: 0,
@@ -49,6 +48,7 @@ const PlayerController = {
             BIPoutsideTheZoneTotal: 0,
             swingPercentage: 0,
             contactPercentage: 0,
+            TeamId: req.body.teamid,
         })
         .then(player => {
             res.send('Player added successfully');
