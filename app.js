@@ -1,10 +1,14 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const cors = require('cors');
 const models = require('./models');
 
 const PORT = process.env.PORT || 8000;
 
 const app = express();
+
+//allow cross origin
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
