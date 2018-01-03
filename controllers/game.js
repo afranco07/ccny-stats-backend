@@ -31,7 +31,8 @@ const GameController = {
             TeamId: req.body.teamid,
         })
         .then(game => {
-            game.addPlayers([1, 2]);
+            //Get Players here
+            game.addPlayers([req.body.player1]);
             res.send('Game created successfully');
         })
         .catch( () => {
