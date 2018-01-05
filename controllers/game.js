@@ -15,6 +15,8 @@ const GameController = {
         models.Game.findAll({
             include: [{
                 model: models.Player,
+            }, {
+                model: models.Team,
             }]
         })
         .then(allGames => {
@@ -32,7 +34,19 @@ const GameController = {
         })
         .then(game => {
             //Get Players here
-            game.addPlayers([req.body.player1]);
+            let lineup = [
+                req.body.player1,
+                req.body.player2,
+                req.body.player3,
+                req.body.player4,
+                req.body.player5,
+                req.body.player6,
+                req.body.player7,
+                req.body.player8,
+                req.body.player9,
+                req.body.player10,
+            ];
+            game.addPlayers(lineup);
             res.send('Game created successfully');
         })
         .catch( () => {
