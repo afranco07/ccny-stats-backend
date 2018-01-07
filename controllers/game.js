@@ -8,6 +8,8 @@ const GameController = {
         router.get('/', this.getGames);
         router.post('/', this.createNewGame);
 
+        router.get('/:id', this.getLineupFromGameWithID);
+
         return router;
     },
 
@@ -51,6 +53,16 @@ const GameController = {
         })
         .catch( () => {
             res.status(404).send('Error creating game');
+        })
+    },
+
+    getLineupFromGameWithID(req, res) {
+        models.Game.findById(req.params.id, { include: models.Player })
+        .then( game => {
+            res.json(game.Players);
+        })
+        .catch( () => {
+            res.status(404);
         })
     },
 };
