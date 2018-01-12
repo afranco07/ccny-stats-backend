@@ -8,6 +8,8 @@ const PlayerController = {
         router.get('/', this.getPlayers);
         router.post('/', this.createPlayer);
 
+        router.put('/:id', this.updatePlayer);
+
         return router;
     },
 
@@ -56,6 +58,42 @@ const PlayerController = {
         .catch( () => {
             res.status(404).send('Error added player');
         });
+    },
+
+    updatePlayer(req, res) {
+        let pitches = this.determineWhichFieldsToUpdate(req.body.result);
+        let zone = this.determineZone(req.body.ballStrike);
+        let fields = [...pitches, ...zone];
+        models.Player.findById(req.params.id)
+        .then( player => {
+            player.increment(fields, {by: 1});
+        })
+        .then( player => {
+            res.send('Player updated successfully');
+        })
+        .catch( () => {
+            res.status(404).send('Error updating player');
+        })
+    },
+
+    determineWhichFieldsToUpdate(resultNumber) {
+        let fields = [];
+        if (resultNumber >= 2 && resultNumber <= 8) {
+            fields = ['totalPitches', 'hardHitBalls'];
+        } else {
+            fields = ['totalPitches'];
+        }
+        return fields;
+    },
+
+    determineZone(ballOrStrike) {
+        let fields = [];
+        if (ballOrStrike === 'strike') {
+            fields = ['pitchesInsideZone'];
+        } else {
+            fields = ['pitchesOutsideZone'];
+        }
+        return fields;
     },
 };
 

@@ -23,12 +23,12 @@ const PitchController = {
     },
 
     createNewPitch(req, res) {
-        models.Pitch.createNewPitch({
+        models.Pitch.create({
             ballOrStrike: req.body.ballStrike,
             result: req.body.result,
         })
         .then(pitch => {
-            game.setPlayer(req.body.player);
+            pitch.setPlayer(req.body.player);
             res.send('Pitch added')
         })
         .catch( () => {
