@@ -7,23 +7,24 @@ const PlayerController = {
 
         router.get('/', this.getPlayers);
         router.post('/', this.createPlayer);
-
+        
+        router.get('/:id', this.getPlayerWithID);
         router.put('/:id', this.updatePlayer);
-
+        
         return router;
     },
-
+    
     getPlayers(req, res) {
         models.Player.findAll()
-            .then(allPlayers => {
+        .then(allPlayers => {
                 if(!allPlayers) {
                     res.status(404).json({ msg: 'No players found' });
                 }
                 res.json(allPlayers);
             })
             .catch(console.error);
-    },
-
+        },
+        
     createPlayer(req, res) {
         models.Player.create({
             firstName: req.body.firstName,
@@ -60,9 +61,19 @@ const PlayerController = {
         });
     },
 
+    getPlayerWithID(req, res) {
+        models.Player.findById(req.params.id)
+        .then( player => {
+            res.json(player);
+        })
+        .catch( () => {
+            res.status(404);
+        });
+    },
+    
     updatePlayer(req, res) {
-        let pitches = this.determineWhichFieldsToUpdate(req.body.result);
-        let zone = this.determineZone(req.body.ballStrike);
+        let pitches = determineWhichFieldsToUpdate(req.body.result);
+        let zone = determineZone(req.body.ballStrike);
         let fields = [...pitches, ...zone];
         models.Player.findById(req.params.id)
         .then( player => {
@@ -75,26 +86,31 @@ const PlayerController = {
             res.status(404).send('Error updating player');
         })
     },
-
-    determineWhichFieldsToUpdate(resultNumber) {
-        let fields = [];
-        if (resultNumber >= 2 && resultNumber <= 8) {
-            fields = ['totalPitches', 'hardHitBalls'];
-        } else {
-            fields = ['totalPitches'];
-        }
-        return fields;
-    },
-
-    determineZone(ballOrStrike) {
-        let fields = [];
-        if (ballOrStrike === 'strike') {
-            fields = ['pitchesInsideZone'];
-        } else {
-            fields = ['pitchesOutsideZone'];
-        }
-        return fields;
-    },
 };
 
 module.exports = PlayerController.registerRouter();
+
+/**
+ * 
+ * Helper Functions for above routes
+ */
+
+function determineWhichFieldsToUpdate(resultNumber) {
+    let fields = [];
+    if (resultNumber >= 2 && resultNumber <= 8) {
+        fields = ['totalPitches', 'hardHitBalls'];
+    } else {
+        fields = ['totalPitches'];
+    }
+    return fields;
+}
+    
+function determineZone(ballOrStrike) {
+    let fields = [];
+    if (ballOrStrike === 'strike') {
+        fields = ['pitchesInsideZone'];
+    } else {
+        fields = ['pitchesOutsideZone'];
+    }
+    return fields;
+}
