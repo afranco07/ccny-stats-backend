@@ -73,7 +73,7 @@ const PlayerController = {
     
     updatePlayer(req, res) {
         let pitches = determineWhichFieldsToUpdate(req.body.result);
-        let zone = determineZone(req.body.ballStrike);
+        let zone = determineZone(req.body.result, req.body.ballStrike, req.body.swing);
         let fields = [...pitches, ...zone];
         models.Player.findById(req.params.id)
         .then( player => {
@@ -97,20 +97,37 @@ module.exports = PlayerController.registerRouter();
 
 function determineWhichFieldsToUpdate(resultNumber) {
     let fields = [];
-    if (resultNumber >= 2 && resultNumber <= 8) {
+    if (resultNumber >= 3 && resultNumber <= 8) {
         fields = ['totalPitches', 'hardHitBalls'];
     } else {
         fields = ['totalPitches'];
     }
+    if (resultNumber > 0) {
+        fields.push('ballsInPlay');
+    }
     return fields;
 }
     
-function determineZone(ballOrStrike) {
+function determineZone(resultNumber, ballOrStrike, swingValue) {
     let fields = [];
     if (ballOrStrike === 'strike') {
         fields = ['pitchesInsideZone'];
+        if (resultNumber > 0) {
+            fields.push('BIPinTheZoneTotal');
+            fields.push('contactInZoneTotal');
+        }
+        if (swingValue) {
+            fields.push('o_swingTotal');
+        }
     } else {
         fields = ['pitchesOutsideZone'];
+        if (resultNumber > 0) {
+            fields.push('BIPoutsideTheZoneTotal');
+            fields.push('contactOutsideZoneTotal');
+        }
+        if(swingValue) {
+            fields.push('z_swingTotal');
+        }
     }
     return fields;
 }
