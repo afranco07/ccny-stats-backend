@@ -1,20 +1,30 @@
-# Backend Starter Code
-
-## Live site
+# Live site
 You can find a live version of the site and all of its routes at: https://ccnybackend.herokuapp.com/
 
-
-## Setup
-
-- Edit `package.json`
+# Setup
+1. Make sure you have `PostgreSQL` installed.
+2. Create a new `PostgreSQl` user with whichever username you want, using the commands:
+```bash
+sudo su - postgres
+createuser -P -s -e USERNAME_HERE
+exit
+```
+3. Create a new `PostgreSQL` database named `ccny_development` (you can use another name if you wish, replace `ccny_development` with the name you want) using the commands
+```bash
+createdb -h localhost -U USERNAME_HERE ccny_development
+```
+4. Edit `package.json`
     + Add your project name, version, description, authors
     + Add any other packages you may need
 
-- Edit `config/config.json`
-    + Add your username, password, and database names
+5. Edit `config/config.json`
+    + Add your username and password created in _STEP 2_, and database names created in _STEP 3_
 
+# Running
+1. Navigate to cloned directory and run `npm install`
+2. To start the server, run `npm start`
 
-## Explanations
+# Explanations
 
 - `/config/config.json`
     + This file contains the credentials for connecting to your postgres database. You need to make sure these details match your DB setup.
@@ -28,12 +38,4 @@ You can find a live version of the site and all of its routes at: https://ccnyba
 - `app.js`
     + This file sets up the basic packages for our projects. Feel free to add more as you see fit.
     + This file already loads up your controllers, so no additional loading is necessary for that to work.
-
-## Optional
-
-- If you want to add views and handlebars to your server side
-    + Uncomment the corresponding code in `app.js`
-    + Add a `/views` folder and the appropriate templates
-
-
-
+    
