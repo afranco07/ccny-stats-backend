@@ -332,3 +332,51 @@ Example:
     },
 ]
 ```
+### `/pitch`
+* GET
+    + Parameters: None
+    + Returns: Returns all of the pitches, their results, zone, and player they're associated with
+
+Example:
+```JSON
+[
+    {
+        "id": 1,
+        "ballOrStrike": "strike",
+        "result": 7,
+        "createdAt": "2018-01-19T05:44:47.463Z",
+        "updatedAt": "2018-01-19T05:44:47.473Z",
+        "PlayerId": 1
+    },
+    {
+        "id": 2,
+        "ballOrStrike": "ball",
+        "result": 7,
+        "createdAt": "2018-01-19T05:44:51.918Z",
+        "updatedAt": "2018-01-19T05:44:51.944Z",
+        "PlayerId": 1
+    },
+
+    ...
+
+    {
+        "id": 7,
+        "ballOrStrike": "strike",
+        "result": 2,
+        "createdAt": "2018-01-19T05:45:24.820Z",
+        "updatedAt": "2018-01-19T05:45:24.824Z",
+        "PlayerId": 2
+    }
+]
+```
+
+* POST
+    + Parameters: 
+    ```JSON
+    {
+        "ballStrike": String,
+        "result": Int,
+        "PlayerId": Int
+    }
+    ```
+    + Returns: Nothing. A new pitch is added to the database
