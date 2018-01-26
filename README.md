@@ -168,3 +168,42 @@ Example: (getting player with id of 1)
     ```
     + `ballStrike` : Either "ball" or "strike"
     + Returns: Nothing. The player with `:id` is updated according to the parameters above
+
+### `/team`
+* Get
+    + Parameters: None
+    + Returns: A list of teams in the database
+
+Example:
+```JSON
+[
+    {
+        "id": 1,
+        "name": "City College of New York",
+        "createdAt": "2018-01-19T05:35:37.046Z",
+        "updatedAt": "2018-01-19T05:35:37.046Z"
+    },
+    {
+        "id": 2,
+        "name": "Baruch",
+        "createdAt": "2018-01-19T05:39:44.720Z",
+        "updatedAt": "2018-01-19T05:39:44.720Z"
+    },
+    {
+        "id": 3,
+        "name": "John Jay",
+        "createdAt": "2018-01-19T05:39:52.412Z",
+        "updatedAt": "2018-01-19T05:39:52.412Z"
+    }
+]
+```
+
+* POST
+    + Parameters: 
+    ```JSON
+    {
+        "teamName": String
+    }
+    ```
+    + Returns: Nothing. A new team is added to the database
+
