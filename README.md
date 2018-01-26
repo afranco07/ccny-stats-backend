@@ -207,3 +207,128 @@ Example:
     ```
     + Returns: Nothing. A new team is added to the database
 
+### `/game`
+* GET
+    + Parameters: None
+    + Returns: List of all the games in the database
+
+Example:
+```JSON
+[
+    {
+        "id": 1,
+        "createdAt": "2018-01-19T05:44:32.003Z",
+        "updatedAt": "2018-01-19T05:44:32.003Z",
+        "TeamId": 2,
+        "Players": [/* Array of Players playing in this game */],
+        "Team": {
+            "id": 2,
+            "name": "Baruch",
+            "createdAt": "2018-01-19T05:39:44.720Z",
+            "updatedAt": "2018-01-19T05:39:44.720Z"
+        }
+    },
+
+    ...
+]
+```
+
+* POST
+    + Parameters:
+    ```JSON
+    {
+        "teamid": Int,
+        "player1": Int,
+        "player2": Int,
+        "player3": Int,
+        "player4": Int,
+        "player5": Int,
+        "player6": Int,
+        "player7": Int,
+        "player8": Int,
+        "player9": Int,
+        "player10": Int,
+        "gameId": Int
+    }
+    ```
+    + Returns: Nothing. A new game vs team with ID `teamid` and players `player1-player10` is created
+
+### `game/:id`
+ * GET
+    + Parameters: None
+    + Returns: List of the players that are in Game with ID of `:id`
+
+Example:
+```JSON
+[
+    {
+        "id": 1,
+        "firstName": "Alberto",
+        "lastName": "Franco",
+        "jerseyNumber": 15,
+        "position": 8,
+        "hardHitBalls": 4,
+        "ballsInPlay": 4,
+        "o_swingTotal": 1,
+        "pitchesOutsideZone": 2,
+        "contactOutsideZoneTotal": 2,
+        "z_swingTotal": 1,
+        "pitchesInsideZone": 2,
+        "contactInZoneTotal": 2,
+        "totalPitches": 4,
+        "swingAndMissTotal": 0,
+        "BIPinTheZoneTotal": 2,
+        "BIPoutsideTheZoneTotal": 2,
+        "createdAt": "2018-01-19T05:40:58.516Z",
+        "updatedAt": "2018-01-19T05:44:57.412Z",
+        "TeamId": 1
+    },
+    {
+        "id": 2,
+        "firstName": "Matt",
+        "lastName": "Sola-Baker",
+        "jerseyNumber": 2,
+        "position": 8,
+        "hardHitBalls": 1,
+        "ballsInPlay": 2,
+        "o_swingTotal": 2,
+        "pitchesOutsideZone": 0,
+        "contactOutsideZoneTotal": 0,
+        "z_swingTotal": 0,
+        "pitchesInsideZone": 3,
+        "contactInZoneTotal": 2,
+        "totalPitches": 3,
+        "swingAndMissTotal": 0,
+        "BIPinTheZoneTotal": 2,
+        "BIPoutsideTheZoneTotal": 0,
+        "createdAt": "2018-01-19T05:41:43.566Z",
+        "updatedAt": "2018-01-19T05:45:24.812Z",
+        "TeamId": 1
+    },
+
+    ...
+
+    {
+        "id": 10,
+        "firstName": "Richy",
+        "lastName": "Bethea",
+        "jerseyNumber": 13,
+        "position": 8,
+        "hardHitBalls": 0,
+        "ballsInPlay": 0,
+        "o_swingTotal": 0,
+        "pitchesOutsideZone": 0,
+        "contactOutsideZoneTotal": 0,
+        "z_swingTotal": 0,
+        "pitchesInsideZone": 0,
+        "contactInZoneTotal": 0,
+        "totalPitches": 0,
+        "swingAndMissTotal": 0,
+        "BIPinTheZoneTotal": 0,
+        "BIPoutsideTheZoneTotal": 0,
+        "createdAt": "2018-01-19T05:43:56.775Z",
+        "updatedAt": "2018-01-19T05:43:56.775Z",
+        "TeamId": 1
+    },
+]
+```
