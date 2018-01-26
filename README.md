@@ -26,12 +26,12 @@ createdb -h localhost -U USERNAME_HERE ccny_development
 
 # API Routes
 Here are the endpoints for this API:
-* [`/player`](#`/player`) (GET & POST)
-* `/player/:id` (GET & PUT)
-* `/team` (GET & POST)
-* `/game` (GET & POST)
-* `/game/:id` (GET)
-* `/pitch` (GET & POST)
+* [`/player`](#player) (GET & POST)
+* [`/player/:id`](#playerid) (GET & PUT)
+* [`/team`](#team) (GET & POST)
+* [`/game`](#game) (GET & POST)
+* [`/game/:id`](#gameid) (GET)
+* [`/pitch`](#pitch) (GET & POST)
 
 ### `/player`
 * GET
